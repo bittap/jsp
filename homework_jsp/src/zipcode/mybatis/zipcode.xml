@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zipcode.mybatis.zipcode">
+	<select id="zipdoeList" parameterType="boardVO" resultType="ZipCodeVO">
+		select * from ZIPCODE_T where 1=1
+		<choose>
+			<when test="searchKind eq 'uid_no' and searchString != null">
+				and ${searchKind} = ${searchString}
+			</when>
+			<when test="searchKind neq '' and searchString != null">
+				and ${searchKind} like '%' || #{searchString} || '%'
+			</when>
+		</choose>
+		 order by uid_no desc offset ${ITEMNUM}*(${nowPage}-1) rows fetch next ${ITEMNUM} rows only
+	</select>
+	<select id="count" parameterType="boardVO" resultType="java.lang.Integer">
+		select ceil(count(*)/${nowPage}) from zipcode_t where 1=1
+		<choose>
+			<when test="searchKind eq 'uid_no' and searchString != null">
+				and ${searchKind} = ${searchString}
+			</when>
+			<when test="searchKind neq '' and searchString != null">
+				and ${searchKind} like '%' || #{searchString} || '%'
+			</when>
+		</choose>
+	</select>
+	<select id="zipcode" parameterType="int" resultType="ZipCodeVO">
+		select * from ZIPCODE_T where uid_no = ${uid_no}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from ZIPCODE_T where uid_no = ${num}
+	</delete>
+	<update id="update" parameterType="ZipCodeVO">
+		update zipcode_t set zipcode = #{zipcode}, address = #{address}, upd_date = (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') FROM DUAL) where uid_no = #{uid_no}
+	</update>
+	<insert id="insert" parameterType="ZipCodeVO">
+		INSERT INTO zipcode_t (uid_no,zipcode, address, upd_date) VALUES (SEQ_uid_no.nextval,#{zipcode}, #{address}, (SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') FROM DUAL))
+	</insert>
+</mapper>

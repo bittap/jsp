@@ -1,0 +1,3 @@
+1. web.xml에서 폴더별로 나눌 수가 없어서 controller 인터페이스와 추상메소드의 의미가 없어짐 => 한개밖에 쓰지 않으므로
+2. FrontController, ZipCodeController에 함수  한 개 씩 추가됨
+3. ZipcodeController <-> ZipcodeLogic BoardVO로 인해 망한거같음

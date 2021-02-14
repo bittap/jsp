@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<!-- html주석과 xml주석은 같다
+외부의 파일을 톰캣 서버 기동할 때 읽기 위해서 제공되는 태그에는
+context-param - 서버기동할 때 한 번 읽어서 끝까지 기억함
+init-param - 서블릿이 변경될 때마다 새로 읽어서 처리함
+ -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<servlet>
+	  <servlet-name>POJO1</servlet-name>
+	  <servlet-class>Test3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>POJO1</servlet-name>
+	  <url-pattern>*.bab</url-pattern>
+	</servlet-mapping>
+</web-app>

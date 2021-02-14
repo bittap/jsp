@@ -1,0 +1,1 @@
+1. 왜 redirect를 쓰는지 모르겠음 굳이 setpearmeter, setAttriibute 안 쓸거면 굳이 쓸 필요가 있나? => 단순히 action페이지에서 이동만 처리한다 해도 피라미터가 필요한데;
